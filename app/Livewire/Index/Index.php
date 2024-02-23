@@ -17,7 +17,7 @@ class Index extends Component
     {
         return Post::query()
             ->with('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->simplePaginate();
     }
 
