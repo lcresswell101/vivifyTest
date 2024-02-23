@@ -1,20 +1,32 @@
 # vivifyTest
 
-composer install && npm install
-
-cp .env.example .env
-
+composer install
+<br />
+npm install 
+<br />
+cp .env.example .env 
+<br />
+<br />
 change
-    DB_HOST=mysql
-    DB_USERNAME=sail
-    DB_PASSWORD=password
+<br />
+DB_HOST=mysql
+<br />
+DB_USERNAME=sail
+<br />
+DB_PASSWORD=password
+<br />
 in .env
+<br />
 
 php artisan key:generate
+<br />
 npm run build
+<br />
 
-./vendor/bin/sail up -d
+./vendor/bin/sail up -d 
+<br />
 ./vendor/bin/sail migrate --seed
+<br />
 
 run `phpunit` for tests
 
