@@ -1,7 +1,6 @@
 # vivifyTest
 
-composer install
-npm install
+composer install && npm install
 
 cp .env.example .env
 
