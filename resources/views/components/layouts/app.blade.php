@@ -8,7 +8,7 @@
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
     <body>
-        <div class="container mx-auto w-6/12">
+        <div class="container mx-auto w-6/12 pt-6">
             {{ $slot }}
         </div>
     </body>
