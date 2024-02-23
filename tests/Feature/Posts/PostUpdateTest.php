@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Posts;
 
-use App\Livewire\Index;
+use App\Livewire\Index\Index;
 use App\Livewire\Posts\PostUpdate;
 use App\Models\Post;
 use App\Models\Status;

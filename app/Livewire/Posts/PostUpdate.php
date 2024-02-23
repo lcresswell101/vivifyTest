@@ -3,7 +3,7 @@
 namespace App\Livewire\Posts;
 
 use App\Livewire\Forms\Posts\PostForm;
-use App\Livewire\Index;
+use App\Livewire\Index\Index;
 use App\Models\Post;
 use App\Models\Status;
 use Livewire\Attributes\Computed;

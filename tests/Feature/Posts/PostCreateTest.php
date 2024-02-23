@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Posts;
 
-use App\Livewire\Index;
+use App\Livewire\Index\Index;
 use App\Livewire\Posts\PostCreate;
 use App\Models\Status;
 use Illuminate\Foundation\Testing\RefreshDatabase;

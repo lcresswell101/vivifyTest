@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Index;
+use App\Livewire\Index\Index;
 use App\Livewire\Posts\PostCreate;
 use App\Livewire\Posts\PostUpdate;
 use Illuminate\Support\Facades\Route;
