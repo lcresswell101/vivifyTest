@@ -2,19 +2,29 @@
 
 namespace App\Livewire\Forms\Posts;
 
-use App\Http\Requests\PostCreateUpdateRequest;
 use App\Models\Post;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use Livewire\Form;
 
 class PostForm extends Form
 {
+    public ?Post $post;
+
     public ?int $status_id = null;
 
     public string $title = '';
 
     public string $description = '';
+
+    public function setPost(Post $post)
+    {
+        $this->post = $post;
+
+        $this->status_id = $post->status_id;
+
+        $this->title = $post->title;
+
+        $this->description = $post->description;
+    }
 
     public function rules()
     {
@@ -37,9 +47,6 @@ class PostForm extends Form
         ];
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function create()
     {
         $this->resetValidation();
@@ -47,5 +54,16 @@ class PostForm extends Form
         $this->validate();
 
         Post::query()->create($this->all());
+    }
+
+    public function update()
+    {
+        $this->resetValidation();
+
+        $this->validate();
+
+        $this->post->update(
+            $this->all()
+        );
     }
 }

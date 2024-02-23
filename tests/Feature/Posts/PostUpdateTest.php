@@ -3,35 +3,48 @@
 namespace Tests\Feature\Posts;
 
 use App\Livewire\Index;
-use App\Livewire\Posts\PostCreate;
+use App\Livewire\Posts\PostUpdate;
+use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class PostCreateTest extends TestCase
+class PostUpdateTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
 
     public function test_renders_correctly() {
-        Livewire::test(PostCreate::class)
+        $post = Post::factory()->create();
+
+        Livewire::test(PostUpdate::class, [
+            'post' => $post,
+        ])
             ->assertStatus(200);
     }
 
     public function test_see_component() {
-        $this->get(route('posts.create'))
-            ->assertSeeLivewire(PostCreate::class);
+        $post = Post::factory()->create();
+
+        $this->get(route('posts.update', [
+            'post' => $post,
+        ]))
+            ->assertSeeLivewire(PostUpdate::class);
     }
 
-    public function test_creates_post() {
+    public function test_updates_post() {
+        $post = Post::factory()->create();
+
         $title = $this->faker->title;
         $description = $this->faker->sentence;
 
         $status = Status::factory()->create();
 
-        Livewire::test(PostCreate::class)
+        Livewire::test(PostUpdate::class, [
+            'post' => $post,
+        ])
             ->set('form.status_id', $status->id)
             ->set('form.title', $title)
             ->set('form.description', $description)
@@ -39,26 +52,14 @@ class PostCreateTest extends TestCase
             ->assertRedirect(Index::class)
             ->assertSessionHas('alert', [
                 'type' => 'success',
-                'message' => 'Post created',
+                'message' => 'Post updated',
             ]);
 
         $this->assertDatabaseHas('posts', [
+            'id' => $post->id,
             'status_id' => $status->id,
             'title' => $title,
             'description' => $description,
         ]);
-    }
-
-    public function test_validates_correctly() {
-        Livewire::test(PostCreate::class)
-            ->set('status_id', '')
-            ->set('title', '')
-            ->set('description', '')
-            ->call('submit')
-            ->assertHasErrors([
-                'form.status_id' => 'required',
-                'form.title' => 'required',
-                'form.description' => 'required',
-            ]);
     }
 }

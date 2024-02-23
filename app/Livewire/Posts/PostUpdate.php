@@ -4,13 +4,19 @@ namespace App\Livewire\Posts;
 
 use App\Livewire\Forms\Posts\PostForm;
 use App\Livewire\Index;
+use App\Models\Post;
 use App\Models\Status;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class PostCreate extends Component
+class PostUpdate extends Component
 {
     public PostForm $form;
+
+    public function mount(Post $post): void
+    {
+        $this->form->setPost($post);
+    }
 
     #[Computed]
     public function statuses()
@@ -20,11 +26,11 @@ class PostCreate extends Component
 
     public function submit(): void
     {
-        $this->form->create();
+        $this->form->update();
 
         session()->flash('alert', [
             'type' => 'success',
-            'message' => 'Post created',
+            'message' => 'Post updated',
         ]);
 
         $this->redirect(Index::class);
@@ -32,6 +38,6 @@ class PostCreate extends Component
 
     public function render()
     {
-        return view('livewire.posts.post-create');
+        return view('livewire.posts.post-update');
     }
 }
