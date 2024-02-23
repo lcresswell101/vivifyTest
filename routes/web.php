@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Index;
+use App\Livewire\Posts\PostCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Index::class);
+
+Route::prefix('posts')->group(function() {
+    Route::get('/create', PostCreate::class)->name('posts.create');
+});
