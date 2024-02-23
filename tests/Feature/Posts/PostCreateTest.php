@@ -39,7 +39,7 @@ class PostCreateTest extends TestCase
             ->assertRedirect(Index::class)
             ->assertSessionHas('alert', [
                 'type' => 'success',
-                'message' => 'Post created',
+                'message' => 'PostShow created',
             ]);
 
         $this->assertDatabaseHas('posts', [
